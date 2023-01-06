@@ -181,7 +181,7 @@
 			align=flush left, % Text alignment inside box
 			text width=1.2\linewidth, % Box width (wider than page to go off the right side)
 			font=\huge\sffamily\bfseries, % Font styling for chapter title
-		] {\parbox{0.85\linewidth}{\strut\raggedright\expandafter\ifstrequal\expandafter{#1}{}{}{\textcolor{MidnightBlue}{Chapter #1}\quad}\textcolor{DarkSlateBlue}{#2}\vspace{-3pt}}}; % Chapter title in a fixed width box for wrapping
+		] {\parbox{0.85\linewidth}{\strut\raggedright\expandafter\ifstrequal\expandafter{#1}{}{}{\textcolor{MidnightBlue}{\chaptername\ #1}\quad}\textcolor{DarkSlateBlue}{#2}\vspace{-3pt}}}; % Chapter title in a fixed width box for wrapping
 	\end{tikzpicture}
 }
 

@@ -41,17 +41,24 @@
 
 \usepackage{ctex}
 
+\renewcommand{\chaptername}{Chapter}
+\renewcommand{\appendixname}{Appendix}
+\renewcommand{\contentsname}{Contents | 目录}
+\renewcommand{\bibname}{References | 参考文献}
+
 %生成随机文本
 \usepackage{lipsum,zhlipsum}
+
+\usepackage{appendix}
 
 
 % Book information for PDF metadata, remove/comment this block if not required 
 \hypersetup{
-	pdftitle={Title}, % Title field
-	pdfauthor={Author}, % Author field
-	pdfsubject={Subject}, % Subject field
-	pdfkeywords={Keyword1, Keyword2, ...}, % Keywords
-	pdfcreator={LaTeX}, % Content creator field
+	pdftitle={x86汇编语言：从实模式到保护模式 Lecture Notes}, % Title field
+	pdfauthor={Flower CA77}, % Author field
+	pdfsubject={电子技术, 计算机科学, 程序设计}, % Subject field
+	% pdfkeywords={Keyword1, Keyword2, ...}, % Keywords
+	pdfcreator={XeLaTeX The Legrand Orange Book}, % Content creator field
 }
 
 \usepackage{xcolor}
@@ -75,6 +82,10 @@
 \newfontfamily\codefamily{Code New Roman Nerd Font Complete.otf}
 
 \usepackage{circuitikz}
+
+\usetikzlibrary{calc}
+
+\ctikzset{american, logic ports=ieee,chips/scale=1.5}
 
 % MATH
 \usepackage{amsmath, esint, siunitx, amsopn, mathtools, bm, bbm}
@@ -265,9 +276,22 @@ $\cdots$\\ % License information, replace this with your own license (if any)
 
 \cleardoublepage % Start the following content on a new page
 
-\chapterimage{Images/bgp2.png}
+\chapterimage{Images/bgp2.jpg}
 \include{includes/ch0.tex}
 \numberwithin{equation}{chapter}
+
+
+\part*{\appendixname}
+\appendix
+\newcommand{\realChapterNameCA}{\chaptername}
+\renewcommand{\chaptername}{\appendixname}
+\chapterimage{Images/bgp2.png}
+\include{includes/ap1.tex}
+\chapterimage{Images/bgp3.png}
+\include{includes/ap2.tex}
+
+\renewcommand{\chaptername}{\realChapterNameCA}
+\let\realChapterNameCA\imareallyundefinedcommand
 
 \chapterimage{Images/bgp1.png}
 \addcontentsline{toc}{chapter}{参考文献}

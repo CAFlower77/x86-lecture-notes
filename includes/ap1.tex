@@ -1,0 +1,198 @@
+\chapter{逻辑门电路符号}
+\label{appendix_logic_gates_symbol}
+\section{IEEE标准}
+\ctikzset{logic ports=ieee}
+\[
+    \begin{circuitikz}
+        \node at (0,0) [left] {缓冲};
+        \draw (4,0) node[buffer port] (gate) {};
+        \draw (gate.in) -- ++(-1,0) node[left] {In};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\]\[
+    \begin{circuitikz}
+        \node at (0,0) [left] {否门};
+        \draw (4,0) node[not port] (gate) {};
+        \draw (gate.in) -- ++(-1,0) node[left] {In};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\]\[
+    \begin{circuitikz}
+        \node at (0,0) [left] {与门};
+        \draw (4,0) node[and port] (gate) {};
+        \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
+        \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\]\[
+    \begin{circuitikz}
+        \node at (0,0) [left] {或门};
+        \draw (4,0) node[or port] (gate) {};
+        \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
+        \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\]\[
+    \begin{circuitikz}
+        \node at (0,0) [left] {异或门};
+        \draw (4,0) node[xor port] (gate) {};
+        \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
+        \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\]\[
+    \begin{circuitikz}
+        \node at (0,0) [left] {同或门};
+        \draw (4,0) node[xnor port] (gate) {};
+        \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
+        \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\]\[
+    \begin{circuitikz}
+        \node at (0,0) [left] {与非门};
+        \draw (4,0) node[nand port] (gate) {};
+        \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
+        \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\]\[
+    \begin{circuitikz}
+        \node at (0,0) [left] {或非门};
+        \draw (4,0) node[nor port] (gate) {};
+        \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
+        \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\]
+\section{American标准}
+\ctikzset{logic ports=american}
+\[
+    \begin{circuitikz}
+        \node at (0,0) [left] {缓冲};
+        \draw (4,0) node[buffer port] (gate) {};
+        \draw (gate.in) -- ++(-1,0) node[left] {In};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\]\[
+    \begin{circuitikz}
+        \node at (0,0) [left] {否门};
+        \draw (4,0) node[not port] (gate) {};
+        \draw (gate.in) -- ++(-1,0) node[left] {In};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\]\[
+    \begin{circuitikz}
+        \node at (0,0) [left] {与门};
+        \draw (4,0) node[and port] (gate) {};
+        \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
+        \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\]\[
+    \begin{circuitikz}
+        \node at (0,0) [left] {或门};
+        \draw (4,0) node[or port] (gate) {};
+        \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
+        \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\]\[
+    \begin{circuitikz}
+        \node at (0,0) [left] {异或门};
+        \draw (4,0) node[xor port] (gate) {};
+        \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
+        \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\]\[
+    \begin{circuitikz}
+        \node at (0,0) [left] {同或门};
+        \draw (4,0) node[xnor port] (gate) {};
+        \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
+        \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\]\[
+    \begin{circuitikz}
+        \node at (0,0) [left] {与非门};
+        \draw (4,0) node[nand port] (gate) {};
+        \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
+        \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\]\[
+    \begin{circuitikz}
+        \node at (0,0) [left] {或非门};
+        \draw (4,0) node[nor port] (gate) {};
+        \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
+        \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\]
+\section{European标准}
+\ctikzset{logic ports=european}
+\[
+    \begin{circuitikz}
+        \node at (0,0) [left] {缓冲};
+        \draw (4,0) node[buffer port] (gate) {};
+        \draw (gate.in) -- ++(-1,0) node[left] {In};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\]\[
+    \begin{circuitikz}
+        \node at (0,0) [left] {否门};
+        \draw (4,0) node[not port] (gate) {};
+        \draw (gate.in) -- ++(-1,0) node[left] {In};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\]\[
+    \begin{circuitikz}
+        \node at (0,0) [left] {与门};
+        \draw (4,0) node[and port] (gate) {};
+        \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
+        \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\]\[
+    \begin{circuitikz}
+        \node at (0,0) [left] {或门};
+        \draw (4,0) node[or port] (gate) {};
+        \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
+        \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\]\[
+    \begin{circuitikz}
+        \node at (0,0) [left] {异或门};
+        \draw (4,0) node[xor port] (gate) {};
+        \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
+        \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\]\[
+    \begin{circuitikz}
+        \node at (0,0) [left] {同或门};
+        \draw (4,0) node[xnor port] (gate) {};
+        \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
+        \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\]\[
+    \begin{circuitikz}
+        \node at (0,0) [left] {与非门};
+        \draw (4,0) node[nand port] (gate) {};
+        \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
+        \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\]\[
+    \begin{circuitikz}
+        \node at (0,0) [left] {或非门};
+        \draw (4,0) node[nor port] (gate) {};
+        \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
+        \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\]
+\ctikzset{logic ports=ieee}

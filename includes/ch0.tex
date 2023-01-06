@@ -1,11 +1,12 @@
 \addcontentsline{toc}{chapter}{绪论}
-\chapter*{绪论}
+\chapter*{Preface | 绪论}
+\addcontentsline{toc}{section}{计数法与进制}
 \section*{计数法与进制}
-\par 从非负整数(在计算机中称为无符号整数)开始，对一个无符号整数$N$，我们总想用一系列确定递增的数字$0,1,2,\cdots,q-1$构成的串来表示数$N$，这种表示法称为\textbf{$q$进制表示法}(要求$q\neq 0$)。根据\textbf{带余除法定理}(或者常识)我们知道有且仅有唯一的无符号整数$p_1,r_1$满足关系式
+\par 从非负整数(在计算机中称为无符号整数)开始, 对一个无符号整数$N$, 我们总想用一系列确定递增的数字$0,1,2,\cdots,q-1$构成的串来表示数$N$, 这种表示法称为\textbf{$q$进制表示法}(要求$q\neq 0$)。根据\textbf{带余除法定理}(或者常识)我们知道有且仅有唯一的无符号整数$p_1,r_1$满足关系式
 \begin{equation}\label{eqn_daiyuchufadingli}
     N=p_1q+r_1
 \end{equation}
-成立且满足$0\leq r_1<q$，这个式子(\ref{eqn_daiyuchufadingli})中的数$p_1,r_2$是未知的，其中$p_1$称为\textbf{$N$除以$q$的商}，$r_1$称为\textbf{$N$除以$q$的余数}，我们可以用数学符号表示为
+成立且满足$0\leq r_1<q$, 这个式子(\ref{eqn_daiyuchufadingli})中的数$p_1,r_2$是未知的, 其中$p_1$称为\textbf{$N$除以$q$的商}, $r_1$称为\textbf{$N$除以$q$的余数}, 我们可以用数学符号表示为
 \begin{equation}
     p_1=\mathop{\rm floor}(N/q),\qquad r_1=N\mod q
 \end{equation}
@@ -13,8 +14,8 @@
 $$
     N/q-1<p_1\leq N/q
 $$
-之间，由于$q\neq 0$那么只有$q\geq 1$，即$N/q\leq N$，也就是$p_1\leq N$。
-\par 我们总结一下，对两个无符号数$N,q$，且$q\neq 0$我们有
+之间, 由于$q\neq 0$那么只有$q\geq 1$, 即$N/q\leq N$, 也就是$p_1\leq N$。
+\par 我们总结一下, 对两个无符号数$N,q$, 且$q\neq 0$我们有
 \begin{equation}
     \begin{cases}N=p_1q+r_1\\0\leq p_1\leq N\\0\leq r_1<q\end{cases}
 \end{equation}
@@ -28,7 +29,7 @@ $$0\leq p_2\leq p_1,\qquad 0\leq r_2<q$$
 \begin{equation}
         N=p_1q+r_1=(p_2q+r_2)q+r_1=p_2q^2+r_2q+r_1
 \end{equation}
-我们把这个过程不断地重复下去，最终会得到一系列的带余除法定理
+我们把这个过程不断地重复下去, 最终会得到一系列的带余除法定理
 \begin{equation}
     p_{n-1}=p_nq+r_n, n=1,2,3,\cdots\qquad\text{$n=1$时定义$p_0=N$}
 \end{equation}
@@ -36,37 +37,37 @@ $$0\leq p_2\leq p_1,\qquad 0\leq r_2<q$$
 \begin{equation}
     0\leq\cdots\leq p_n\leq\cdots\leq p_2\leq p_1,\qquad 0\leq r_1,r_2,\cdots,r_n,\cdots< q
 \end{equation}
-第一个不等式是一个不等式链，这表示$p_n$向下递减但是有下界0，这说明$p_n$不会无限的递减，最终会停在某一个值$p_{n_0}=p_{n_0+1}=p_{n_0+2}=\cdots$，而第二个不等式告诉我们$r_1,r_2,\cdots,r_n$都有一个范围。类似的，我们可以推一下$N$的表达式
+第一个不等式是一个不等式链, 这表示$p_n$向下递减但是有下界0, 这说明$p_n$不会无限的递减, 最终会停在某一个值$p_{n_0}=p_{n_0+1}=p_{n_0+2}=\cdots$, 而第二个不等式告诉我们$r_1,r_2,\cdots,r_n$都有一个范围。类似的, 我们可以推一下$N$的表达式
 \begin{align}
         N&=(p_3q+r_3)q^2+r_2q+r_1=p_3q^3+r_3q^2+r_2q+r_1\notag\\
         &=(p_4q+r_4)q^3+r_3q^2+r_2q+r_1=p_4q^4+r_4q^3+r_3q^2+r_2q+r_1\notag\\
         &=\cdots\notag\\
         &=p_nq^n+r_nq^{n-1}+r_{n-1}q^{n-2}+r_{n-2}q^{n-3}+\cdots+r_2q+r_1=p_nq^n+\sum_{k=1}^n r_kq^{k-1}\label{eqn_express_of_N}
 \end{align}
-我们知道$p_n$必定会递减到某个恒定值$p_{n_0}$，下面我们要论证$p_{n_0}=0$。事实上假设在$n=n_0$时$p_n=p_{n_0}$并恒定在$n_0$，那么我们把上面式子的$n$在$n_0$后再加一步
+我们知道$p_n$必定会递减到某个恒定值$p_{n_0}$, 下面我们要论证$p_{n_0}=0$。事实上假设在$n=n_0$时$p_n=p_{n_0}$并恒定在$n_0$, 那么我们把上面式子的$n$在$n_0$后再加一步
 $$N=p_{n_0}q^{n_0}+\sum_{k=1}^{n_0}r_kq^{k-1}=p_{n_0}q^{n_0+1}+\sum_{k=1}^{n_0+1}r_kq^{k-1}$$
 消去两边相同的项有
 $$p_{n_0}q^{n_0}=p_{n_0}q^{n_0+1}+r_{n_0+1}q^{n_0}$$
-对这个方程两边消去$q^{n_0}$后得到$p_{n_0}(q-1)+r_{n_0+1}=0$, 那么$r_{n_0+1}=0$并且$q=1$或$p_{n_0}=0$。在$q=1$时代入表达式(\ref{eqn_express_of_N})可以看到全部的$r_{k}=0$，这是一个没有意义的平凡情况，我们不需要讨论，这说明了$p_{n_0}=0$的确成立。
-\par 当$n\geq n_0$时式(\ref{eqn_express_of_N})就变成了完全是$r_1,r_2,\cdots,r_{n_0}$这$n_0$个余数的函数，我们将其记作串$r_{n_0}\cdots r_2r_1$，这就是数$N$的\textbf{$q$进制表示法}。为了说清楚这个串是在$q$进制下表示的，我们将其记作$(r_{n_0}\cdots r_2r_1)_{(q)}$
+对这个方程两边消去$q^{n_0}$后得到$p_{n_0}(q-1)+r_{n_0+1}=0$, 那么$r_{n_0+1}=0$并且$q=1$或$p_{n_0}=0$。在$q=1$时代入表达式(\ref{eqn_express_of_N})可以看到全部的$r_{k}=0$, 这是一个没有意义的平凡情况, 我们不需要讨论, 这说明了$p_{n_0}=0$的确成立。
+\par 当$n\geq n_0$时式(\ref{eqn_express_of_N})就变成了完全是$r_1,r_2,\cdots,r_{n_0}$这$n_0$个余数的函数, 我们将其记作串$r_{n_0}\cdots r_2r_1$, 这就是数$N$的\textbf{$q$进制表示法}。为了说清楚这个串是在$q$进制下表示的, 我们将其记作$(r_{n_0}\cdots r_2r_1)_{(q)}$
 \begin{equation}\label{eqn_qexp_of_N}
     N=(r_{n_0}\cdots r_2r_1)_{(q)}=\sum_{k=1}^n r_kq^{k-1}
 \end{equation}
-仔细观察式(\ref{eqn_qexp_of_N})，不难发现$q=10$时上式就是一般地计数法，不难猜出在任意$q$进制下表示的无符号整数都是满足与正常计数法相同的竖式运算法则，这些内容可以参考相关的数学教材。
-\par 下面我们要给出进制转换的一个重要定理，这个定理可以加速一类进制转换的计算速度，对程序设计尤其重要：
+仔细观察式(\ref{eqn_qexp_of_N}), 不难发现$q=10$时上式就是一般地计数法, 不难猜出在任意$q$进制下表示的无符号整数都是满足与正常计数法相同的竖式运算法则, 这些内容可以参考相关的数学教材。
+\par 下面我们要给出进制转换的一个重要定理, 这个定理可以加速一类进制转换的计算速度, 对程序设计尤其重要：
 \begin{theorem*}
-    对正整数$n$，$q^n$进制的一位无符号整数可以用最高$n$位$q$进制无符号整数表示，我们记作
+    对正整数$n$, $q^n$进制的一位无符号整数可以用最高$n$位$q$进制无符号整数表示, 我们记作
     \begin{equation}
         (b)_{(q^n)}=\left(a^{(b)}_{n}a^{(b)}_{n-1}\cdots a^{(b)}_1\right)_{(q)},\qquad b=0,1,2,\cdots,q^{n-1}\label{eqn_theorem_of_exp_of_qntoq_1bit}
     \end{equation}
-    对任意$q^n$进制数$(b_Nb_{N-1}\cdots b_1)_{(q^n)}$，其$q$进制表示为
+    对任意$q^n$进制数$(b_Nb_{N-1}\cdots b_1)_{(q^n)}$, 其$q$进制表示为
     \begin{align}
         &(b_Nb_{N-1}\cdots b_1)_{(q^n)}\notag\\=&\left(a^{(b_N)}_{n}a^{(b_N)}_{n-1}\cdots a^{(b_N)}_1a^{(b_{N-1})}_{n}a^{(b_{N-1})}_{n-1}\cdots a^{(b_{N-1})}_1\cdots a^{(b_1)}_{n}a^{(b_1)}_{n-1}\cdots a^{(b_1)}_1\right)_{(q)}\label{eqn_theorem_of_exp_of_qntoq}
     \end{align}
-    相反，对任意一个$q^n$进制数，如果位数是$n$的整数倍$N$倍，则也可以按照式(\ref{eqn_theorem_of_exp_of_qntoq})反推出其$q$进制表示；如果其位数不是$n$的整数倍，则在最高位前面补0使其位数为$n$的整数倍后再次进行同样的操作即可。
+    相反, 对任意一个$q^n$进制数, 如果位数是$n$的整数倍$N$倍, 则也可以按照式(\ref{eqn_theorem_of_exp_of_qntoq})反推出其$q$进制表示；如果其位数不是$n$的整数倍, 则在最高位前面补0使其位数为$n$的整数倍后再次进行同样的操作即可。
 \end{theorem*}
 \begin{proof}
-    直接把(\ref{eqn_theorem_of_exp_of_qntoq})展开，利用(\ref{eqn_theorem_of_exp_of_qntoq_1bit})即可。具体计算过程：
+    直接把(\ref{eqn_theorem_of_exp_of_qntoq})展开, 利用(\ref{eqn_theorem_of_exp_of_qntoq_1bit})即可。具体计算过程：
     \[\begin{split}
         (b)_{(q^n)}&=\sum_{k=1}^n \left(a_k^{(b)}\right)_{(q)} q^{k-1}\\
         (b_Nb_{N-1}\cdots b_1)_{(q^n)}&=\sum_{\ell=1}^N(b_\ell)_{(q^n)}(q^n)^{\ell-1}=\sum_{\ell=1}^N\sum_{k=1}^n \left(a_k^{(b_\ell)}\right)_{(q)} q^{k-1}(q^n)^{\ell-1}\\
@@ -78,9 +79,9 @@ $$p_{n_0}q^{n_0}=p_{n_0}q^{n_0+1}+r_{n_0+1}q^{n_0}$$
         =&\sum_{\ell=1}^N\left(a^{(b_\ell)}_{n}a^{(b_\ell)}_{n-1}\cdots a^{(b_\ell)}_1\right)_{(q)} q^{n(\ell-1)}=\sum_{\ell=1}^N\left[\sum_{k=1}^n\left(a^{(b_\ell)}_{k}\right)_{(q)} q^{k-1}\right] q^{n(\ell-1)}\\
         =&\sum_{\ell=1}^N\sum_{k=1}^n \left(a_k^{(b_\ell)}\right)_{(q)} q^{n(\ell-1)+k-1}
     \end{split}\]
-    可以看到(\ref{eqn_theorem_of_exp_of_qntoq})式两边展开后的二重和式交换求和次序就是相同的，这就证明了定理。
+    可以看到(\ref{eqn_theorem_of_exp_of_qntoq})式两边展开后的二重和式交换求和次序就是相同的, 这就证明了定理。
 \end{proof}
-\par 在文献\cite{Zorich:MA}第一卷(Part 1)中第二章\S 2的第4小结c段中给出了任意实数的$q$进制表示法，每个实数$R$都可以表示为一个有符号的无限序列
+\par 在文献\cite{Zorich:MA}第一卷(Part 1)中第二章\S 2的第4小结c段中给出了任意实数的$q$进制表示法, 每个实数$R$都可以表示为一个有符号的无限序列
 \begin{equation}\label{eqn_exp_of_real_number_with_q_exp}
     R=\begin{cases}
         (\alpha_p\alpha_{p-1}\cdots\alpha_1.\alpha_{0}\alpha_{-2}\cdots)_{(q)}&(p\geq 1)\\
@@ -91,23 +92,23 @@ $$p_{n_0}q^{n_0}=p_{n_0}q^{n_0+1}+r_{n_0+1}q^{n_0}$$
 $$\alpha_p\neq 0,\qquad\alpha_k=0,1,2,\cdots,q-1\ (k=p,p-1,\cdots)$$
 式(\ref{eqn_exp_of_real_number_with_q_exp})中的序列定义为
 $$(\alpha_r\alpha_{r-1}\cdots\alpha_1.\alpha_0\alpha_{-1}\alpha_{-2}\cdots)_{(q)}:=\sum_{k=-\infty}^r\left(\alpha_r\right)_{(q)} q^{r-1}$$
-这里$r$在$p\geq 1$时为$p$，在$p<1$时为$1$且$\alpha_r,\alpha_{r-1},\cdots,\alpha_{p+1}=0$。
-\par 这种表示法有一个弊端就是任意实数到计数序列的映射不是一一对应的，例如下列两个序列代表同一个实数：
+这里$r$在$p\geq 1$时为$p$, 在$p<1$时为$1$且$\alpha_r,\alpha_{r-1},\cdots,\alpha_{p+1}=0$。
+\par 这种表示法有一个弊端就是任意实数到计数序列的映射不是一一对应的, 例如下列两个序列代表同一个实数：
 $$\left(\alpha_p\alpha_{p-1}\cdots\alpha_{1}.\alpha_{0}\alpha_{-1}\cdots\alpha_{-n+1}\alpha_{-n}000\cdots\right)_{(q)}$$
 $$\left(\alpha_p\alpha_{p-1}\cdots\alpha_{1}.\alpha_{0}\alpha_{-1}\cdots\alpha_{-n+1}(\alpha_{-n}-1)(\alpha_{-n}-1)(\alpha_{-n}-1)\cdots\right)_{(q)}$$
 需要格外注意。
-
+\addcontentsline{toc}{section}{数字电路}
 \section*{数字电路}
-\par 一个二进制位可以用数字电路的一个端子表示，我们用低电平表示0，用高电平表示1。除开二进制运算外我们还需要引入\textbf{位运算}。位运算是逐位运算的，即：
+\par 一个二进制位可以用数字电路的一个端子表示, 我们用低电平表示0, 用高电平表示1。除开二进制运算外我们还需要引入\textbf{位运算}。位运算是逐位运算的, 即：
 \begin{definition*}
-    对二进制数$(a_na_{n-1}\cdots a_1)_{(2)}$, $(b_nb_{n-1}\cdots b_1)_{(2)}$ (位数不相同时在位数短的那个数前面补0使其相同)。若某种运算$*$是位运算，则要求
+    对二进制数$(a_na_{n-1}\cdots a_1)_{(2)}$, $(b_nb_{n-1}\cdots b_1)_{(2)}$ (位数不相同时在位数短的那个数前面补0使其相同)。若某种运算$*$是位运算, 则要求
     $$(a_na_{n-1}\cdots a_1)_{(2)}*(a_na_{n-1}\cdots a_1)_{(2)}=(c_nc_{n-1}\cdots c_1)_{(2)}$$
     $$c_k=a_k*b_k,\qquad k=1,2,\cdots,n$$
 \end{definition*}
-\par 所以定义一个位运算我们只要定义这个运算在两个一位二进制数(称为\textbf{bit位})上的运算结果即可，这个结果有$2^\#$个值( $\#$为运算操作数个数)，将这些值全部列出来得到的就是这个位运算的\textbf{真值表}。
+\par 所以定义一个位运算我们只要定义这个运算在两个一位二进制数(称为\textbf{bit位})上的运算结果即可, 这个结果有$2^\#$个值( $\#$为运算操作数个数), 将这些值全部列出来得到的就是这个位运算的\textbf{真值表}。
 \par 下面我们来定义一些常用的位运算。
 \subsection*{操作数=1的位运算}
-\par 单操作数的位运算只能有两种(排除两种常数运算)，一种就是保持操作数不变的恒等运算，另一种就是我们要定义的\textbf{否运算}。前者是平凡情况，这种运算往往出现在电路中，被称为\textbf{缓冲}，其目的是降低电路的电子干扰(否则没必要设计电路，直接用导线连到端口即可)。那么容易得到否运算的真值表如下：
+\par 单操作数的位运算只能有两种(排除两种常数运算), 一种就是保持操作数不变的恒等运算, 另一种就是我们要定义的\textbf{否运算}。前者是平凡情况, 这种运算往往出现在电路中, 被称为\textbf{缓冲}, 其目的是降低电路的电子干扰(否则没必要设计电路, 直接用导线连到端口即可)。那么容易得到否运算的真值表如下：
 \begin{equation}\label{eqn_of_not_a_tftable}
     \begin{array}{c|c}
         a&\bnot a\\
@@ -116,9 +117,9 @@ $$\left(\alpha_p\alpha_{p-1}\cdots\alpha_{1}.\alpha_{0}\alpha_{-1}\cdots\alpha_{
         1&0\\
     \end{array}
 \end{equation}
-事实上对命题$P$，我们常常用0表示$P=\rm false$，用1表示$P=\rm true$，那么$P$的真值就能被一个1位二进制数表示。根据式(\ref{eqn_of_not_a_tftable})容易看到，若$P$的真值可以表示为1位二进制数$a$，则$\bnot a$就是$P$的\textbf{否命题}$\lnot P$的真值。
+事实上对命题$P$, 我们常常用0表示$P=\rm false$, 用1表示$P=\rm true$, 那么$P$的真值就能被一个1位二进制数表示。根据式(\ref{eqn_of_not_a_tftable})容易看到, 若$P$的真值可以表示为1位二进制数$a$, 则$\bnot a$就是$P$的\textbf{否命题}$\lnot P$的真值。
 \subsection*{操作数=2的位运算}
-\par 根据(\ref{eqn_of_not_a_tftable})式的启发，我们只定义能够对应命题逻辑运算的位运算，因为全部的二元位运算太多了(有$2^{(2^\#)}|_{\#=2}-2=14$种这么多)。为方便我们用一对大小写(如$A$和$a$)的大写表示命题，小写表示对应这个命题真值的二进制数，那么位操作的真值表就与命题运算的真值表一致了。
+\par 根据(\ref{eqn_of_not_a_tftable})式的启发, 我们只定义能够对应命题逻辑运算的位运算, 因为全部的二元位运算太多了(有$2^{(2^\#)}|_{\#=2}-2=14$种这么多)。为方便我们用一对大小写(如$A$和$a$)的大写表示命题, 小写表示对应这个命题真值的二进制数, 那么位操作的真值表就与命题运算的真值表一致了。
 \par 对基础的\textbf{与运算$\band$} (逻辑学中称为\textbf{合取$\land$} )和\textbf{或运算$\bor$} (逻辑学中称为\textbf{析取$\lor$} )我们有：
 \begin{equation}\label{eqn_of_and_or_a_tftable}
     \begin{array}{cc|cc|c|c|c|c}
@@ -130,7 +131,7 @@ $$\left(\alpha_p\alpha_{p-1}\cdots\alpha_{1}.\alpha_{0}\alpha_{-1}\cdots\alpha_{
         1&\rm true&1&\rm true&1&\rm true&1&\rm true
     \end{array}
 \end{equation}
-式(\ref{eqn_of_and_or_a_tftable})从原则上以及足够我们使用了，而蕴含、反蕴涵、等值等逻辑二元命题运算适用价值并不大，所以我们没有定义相关的位运算。另外根据逻辑学我们还知道两个运算：\textbf{异或$\oplus$}和\textbf{同或$\odot$}
+式(\ref{eqn_of_and_or_a_tftable})从原则上以及足够我们使用了, 而蕴含、反蕴涵、等值等逻辑二元命题运算适用价值并不大, 所以我们没有定义相关的位运算。另外根据逻辑学我们还知道两个运算：\textbf{异或$\oplus$}和\textbf{同或$\odot$}
 $$A\oplus B=(\lnot A\land B)\lor(A\land\lnot B)$$
 $$A\odot B=(A\land B)\lor(\lnot A\land\lnot B)$$
 这两个运算有定义为位运算$\bxor$ (异或)、$\bxnor$ (同或)的价值
@@ -144,7 +145,7 @@ $$A\odot B=(A\land B)\lor(\lnot A\land\lnot B)$$
         1&\rm true&1&\rm true&0&\rm false&1&\rm true
     \end{array}
 \end{equation}
-另外对(\ref{eqn_of_and_or_a_tftable})式取否也有作为新的运算的价值，这两个位运算没有对应的逻辑运算(原则上也可以定义)，其真值表为
+另外对(\ref{eqn_of_and_or_a_tftable})式取否也有作为新的运算的价值, 这两个位运算没有对应的逻辑运算(原则上也可以定义), 其真值表为
 \begin{equation}\label{eqn_of_nor_nand__a_tftable}
     \begin{array}{c|c|c|c}
         a&b&a\bnand b&a\bnor b\\
@@ -157,82 +158,174 @@ $$A\odot B=(A\land B)\lor(\lnot A\land\lnot B)$$
 \end{equation}
 我们称$\bnand$为\textbf{与非}、称$\bnor$为\textbf{或非}。
 \subsection*{逻辑门}
-\par 我们前面提到过一个二进制位可以用数字电路的一个端子表示，那么通过一定的电路手段我们能够得到这么一个1/2端口输入1端口输出的电路网络，其输出为输入的位运算，这种电路网络经过封装后被我们称为\textbf{逻辑门}。逻辑门电路的构造比直接构造运算电路要容易得多，所以事实上二进制的运算电路都是利用逻辑门构造的。下面给出不同位运算的逻辑门电路符号：
-\begin{figure}[H]
-    \centering
+\par 我们前面提到过一个二进制位可以用数字电路的一个端子表示, 那么通过一定的电路手段我们能够得到这么一个1/2端口输入1端口输出的电路网络, 其输出为输入的位运算, 这种电路网络经过封装后被我们称为\textbf{逻辑门}。逻辑门电路的构造比直接构造运算电路要容易得多, 所以事实上二进制的运算电路都是利用逻辑门构造的。下面给出不同位运算的逻辑门电路符号：
+\[
     \begin{circuitikz}
         \node at (0,0) [left] {缓冲};
-        \draw (4,0) node[ieeestd buffer port] (gate) {};
+        \draw (4,0) node[buffer port] (gate) {};
         \draw (gate.in) -- ++(-1,0) node[left] {In};
         \draw (gate.out) -- ++(1,0) node[right] {Out};
     \end{circuitikz}
-\end{figure}
-\begin{figure}[H]
-    \centering
+\]\[
     \begin{circuitikz}
         \node at (0,0) [left] {否门};
-        \draw (4,0) node[ieeestd not port] (gate) {};
+        \draw (4,0) node[not port] (gate) {};
         \draw (gate.in) -- ++(-1,0) node[left] {In};
         \draw (gate.out) -- ++(1,0) node[right] {Out};
     \end{circuitikz}
-\end{figure}
-\begin{figure}[H]
-    \centering
+\]\[
     \begin{circuitikz}
         \node at (0,0) [left] {与门};
-        \draw (4,0) node[ieeestd and port] (gate) {};
+        \draw (4,0) node[and port] (gate) {};
         \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
         \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
         \draw (gate.out) -- ++(1,0) node[right] {Out};
     \end{circuitikz}
-\end{figure}
-\begin{figure}[H]
-    \centering
+\]\[
     \begin{circuitikz}
         \node at (0,0) [left] {或门};
-        \draw (4,0) node[ieeestd or port] (gate) {};
+        \draw (4,0) node[or port] (gate) {};
         \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
         \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
         \draw (gate.out) -- ++(1,0) node[right] {Out};
     \end{circuitikz}
-\end{figure}
-\begin{figure}[H]
-    \centering
+\]\[
     \begin{circuitikz}
         \node at (0,0) [left] {异或门};
-        \draw (4,0) node[ieeestd xor port] (gate) {};
+        \draw (4,0) node[xor port] (gate) {};
         \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
         \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
         \draw (gate.out) -- ++(1,0) node[right] {Out};
     \end{circuitikz}
-\end{figure}
-\begin{figure}[H]
-    \centering
+\]\[
     \begin{circuitikz}
         \node at (0,0) [left] {同或门};
-        \draw (4,0) node[ieeestd xnor port] (gate) {};
+        \draw (4,0) node[xnor port] (gate) {};
         \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
         \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
         \draw (gate.out) -- ++(1,0) node[right] {Out};
     \end{circuitikz}
-\end{figure}
-\begin{figure}[H]
-    \centering
+\]\[
     \begin{circuitikz}
         \node at (0,0) [left] {与非门};
-        \draw (4,0) node[ieeestd nand port] (gate) {};
+        \draw (4,0) node[nand port] (gate) {};
         \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
         \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
         \draw (gate.out) -- ++(1,0) node[right] {Out};
     \end{circuitikz}
-\end{figure}
-\begin{figure}[H]
-    \centering
+\]\[
     \begin{circuitikz}
         \node at (0,0) [left] {或非门};
-        \draw (4,0) node[ieeestd nor port] (gate) {};
+        \draw (4,0) node[nor port] (gate) {};
         \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
         \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
         \draw (gate.out) -- ++(1,0) node[right] {Out};
     \end{circuitikz}
-\end{figure}
+\]
+可以看到, 这些逻辑门符号有着很强的规律性：
+\begin{enumerate}
+    \item 逻辑门右边加一个$\circ$表示取否；
+    \item 二输入端逻辑门框体左侧边是直的表示$\band$、是弯的表示$\bor$；
+    \item 二输入端逻辑门左边加一条边表示“取x运算”, 即$\bor\to\bxor,\bnor\to\bxnor$。
+\end{enumerate}
+\par 值得注意的是, 逻辑门符号具有不同的标准, 上述标准为IEEE标准, 也是本文档使用的标准, 我们在附录 \ref{appendix_logic_gates_symbol} 中给出各个标准下的逻辑门符号。
+\subsection*{二进制加法的电路实现}
+\par 考虑两个1位二进制数$A,B$的加法, 其结果为一个2位二进制数, 记作$A+B=(CS)_2$。我们称$S$为$A,B$的\textbf{和位}, 而$C$的值与命题: "$A+B$是否产生进位"的真值相同, 我们称$C$为\textbf{进位标识符}。我们列出所有情况：
+\begin{equation}
+    \begin{array}{cc|c|c}
+        A&B&C&S\\
+        \hline
+        0&0&0&0\\
+        0&1&0&1\\
+        1&0&0&1\\
+        1&1&1&0
+    \end{array}
+\end{equation}
+直接对比真值表就可以得到这么一条重要的定理：
+\begin{theorem*}[加法电路基本原理]
+    对两个1位二进制数$A,B$, 若记$A+B=(CS)_{(2)}$, 则有逻辑关系式$S=A\bxor B$、$C=A\band B$成立。
+\end{theorem*}
+\par 根据这个定理，我们可以设计一个电路来实现二进制的加法并进行封装：
+\[
+    \begin{circuitikz}
+        \ctikzset{multipoles/dipchip/width=1.5}
+        \draw (0,0) node[xor port] (calcS) {};
+        \draw (0,-2) node[and port] (calcC) {};
+        \draw (calcS.in 1) -- ++(-3,0) node[left] (inA) {$A$};
+        \draw (calcS.in 2) -- ++(-3,0) node[left] (inB) {$B$};
+        \draw (calcS.out) -- ++(0.5,0) node[right] (outS) {$S$};
+        \draw (calcC.out) -- ++(0.5,0) node[right] (outC) {$C$};
+        \draw (calcS.in 2) node at ++(-1,0) [jump crossing, rotate=-90, scale=1.5] (X) {};
+        \draw (calcC.in 1) -| (X.east)
+            (X.west) to[short,-*] (X.west |- calcS.in 1);
+        \draw (calcC.in 2) -| ($(calcS.in 2) + (-2,0)$) node[circ] {};
+        \draw (6,-1) node[dipchip, num pins=4, hide numbers] (adder) {Half-Adder};
+        \draw (adder.pin 1) -- ++(-0.5,0) node[left] {$A$};
+        \draw (adder.pin 2) -- ++(-0.5,0) node[left] {$B$};
+        \draw (adder.pin 3) -- ++(0.5,0) node[right] {$C$};
+        \draw (adder.pin 4) -- ++(0.5,0) node[right] {$S$};
+    \end{circuitikz}
+\]
+这种封装电路称为\textbf{半加器(HA)}，半加器是一个4端口网络。
+\par 下面我们来考虑三个二进制数的相加$A+B+D$，同样这个和只有两位(最大为$(11)_{(2)}$)，故我们还是记$A+B+D=(CS)_{(2)}$。首先我们看$S$，明显$S$为$A+B$的和位与$D$相加的和位，而$C$实际上只在$A+B$产生进位或者$A+B$的和位与$D$相加产生进位时为1，事实上从真值表也可以看出这点，由此我们可以设计如下电路：
+\[
+    \begin{circuitikz}
+        \ctikzset{multipoles/dipchip/width=1.5}
+        \draw (0,0) node[dipchip, num pins=4, hide numbers] (adder1) {Half-Adder};
+        \node at ($(adder1.pin 1)-(0.5,0)$) (inA) {};
+        \node at ($(adder1.pin 2)-(0.5,0)$) (inB) {};
+        \draw (adder1.pin 1) -- (inA) node[left] {$A$};
+        \draw (adder1.pin 2) -- (inB) node[left] {$B$};
+        \draw ($(adder1.pin 4) + (2.5,-3)$) node[dipchip, num pins=4, hide numbers] (adder2) {Half-Adder};
+        \draw (adder1.pin 4) -| (adder2.pin 1);
+        \draw (adder2.pin 2) -- ($(adder2.pin 2) - (1.5,0)$) node[left] {$D$};
+        \draw (adder2.pin 4) -- ++(1,0) node[right] {$S$};
+        \node at($(adder2.pin 2)!(adder1.pin 3)!(adder2.pin 3)$) [jump crossing, scale=1.5, rotate=90] (X) {};
+        \draw (adder1.pin 3) -| (X.east);
+        \draw ($(adder2.pin 3)-(-2,1)$) node[or port] (calcC) {};
+        \draw (adder2.pin 3) -- (calcC.in 1);
+        \draw (X.west) |- (calcC.in 2);
+        \draw (calcC.out) -- ++(1,0) node[right] {$C$};
+    \end{circuitikz}
+\]
+这种电路称之为\textbf{全加器(FA)}，被封装为
+\[\begin{circuitikz}
+    \ctikzset{multipoles/dipchip/width=1.5}
+    \draw (0,0) node[dipchip, num pins=6, hide numbers, external pins width=0.0] (adder) {Full-Adder};
+    \draw (adder.pin 1) -- ++(-0.5,0) node[left] {$D$};
+    \draw (adder.pin 2) -- ++(-0.5,0) node[left] {$A$};
+    \draw (adder.pin 3) -- ++(-0.5,0) node[left] {$B$};
+    \draw (adder.pin 4) -- ++(0.5,0) node[right] {$C$};
+    \draw (adder.pin 5) -- ++(0.5,0) node[right] {$S$};
+\end{circuitikz}\]
+利用全加器我们可以对两个任意多位二进制数求和。例如考虑$A=(A_nA_{n-1}\cdots A_1)_{(2)}$与$B=(B_nB_{n-1}\cdots B_1)_{(2)}$的和，我们可以对每一位都做一个FA，其中$D$为上一位的进位，而第一位由于没有进位所以用HA，以$n=4$为例我们有如下电路
+\[\begin{circuitikz}
+    \ctikzset{multipoles/dipchip/width=0.8}
+    \draw (0,0) node[dipchip, num pins=4, hide numbers] (adder1) {HA};
+    \draw (adder1.pin 1) -- ++(-0.5,0) node[left] {$A_1$};
+    \draw (adder1.pin 2) -- ++(-0.5,0) node[left] {$B_1$};
+    \draw (adder1.pin 4) -- ++(0.5,0) node[right] {$S_1$};
+    \draw ($(adder1.pin 3)+(2,-0.84)$) node[dipchip, num pins=6, hide numbers, external pins width=0.0] (adder2) {FA};
+    \draw (adder1.pin 3) -- (adder2.pin 1);
+    \draw (adder2.pin 2) -- ++(-0.5,0) node[left] {$A_2$};
+    \draw (adder2.pin 3) -- ++(-0.5,0) node[left] {$B_2$};
+    \draw (adder2.pin 5) -- ++(0.5,0) node[right] {$S_2$};
+    \draw ($(adder2.pin 4)+(2,-0.84)$) node[dipchip, num pins=6, hide numbers, external pins width=0.0] (adder3) {FA};
+    \draw (adder2.pin 4) -- (adder3.pin 1);
+    \draw (adder3.pin 2) -- ++(-0.5,0) node[left] {$A_3$};
+    \draw (adder3.pin 3) -- ++(-0.5,0) node[left] {$B_3$};
+    \draw (adder3.pin 5) -- ++(0.5,0) node[right] {$S_3$};
+    \draw ($(adder3.pin 4)+(2,-0.84)$) node[dipchip, num pins=6, hide numbers, external pins width=0.0] (adder4) {FA};
+    \draw (adder3.pin 4) -- (adder4.pin 1);
+    \draw (adder4.pin 2) -- ++(-0.5,0) node[left] {$A_4$};
+    \draw (adder4.pin 3) -- ++(-0.5,0) node[left] {$B_4$};
+    \draw (adder4.pin 5) -- ++(0.5,0) node[right] {$S_4$};
+    \draw (adder4.pin 4) -- ++(0.5,0) node[right] {$S_5$};
+\end{circuitikz}\]
+这个电路完成了$n=4$时的运算
+$$(A_4A_3A_2A_1)_{(2)}+(B_4B_3B_2B_1)_{(2)}=(S_5S_4S_3S_2S_1)_{(2)}$$
+这种电路称为\textbf{$n$位加法器}。从电路图中可以看出，$n$位加法器有$n-1$个FA和1个HA，一个FA有2个HA和1个或门，就相当于整个加法器有$2(n-1)+1=2n-1$个HA和1个或门。1个HA有1个与门和1个异或门，那么整个加法器有$2n-1$个与门、$2n-1$个异或门、1个或门，每个逻辑门都是1个晶体管，那么加法器芯片的晶体管数就是全部逻辑门数
+\begin{equation}
+    (2n-1)+(2n-1)+1=4n-1
+\end{equation}
+这个式子说明构造一个加法器需要的晶体管数与加法器的位数线性相关。
