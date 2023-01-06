@@ -1,0 +1,111 @@
+\addcontentsline{toc}{chapter}{绪论}
+\chapter*{绪论}
+\section*{计数法与进制}
+\par 从非负整数(在计算机中称为无符号整数)开始，对一个无符号整数$N$，我们总想用一系列确定递增的数字$0,1,2,\cdots,q-1$构成的串来表示数$N$，这种表示法称为\textbf{$q$进制表示法}(要求$q\neq 0$)。根据\textbf{带余除法定理}(或者常识)我们知道有且仅有唯一的无符号整数$p_1,r_1$满足关系式
+\begin{equation}\label{eqn_daiyuchufadingli}
+    N=p_1q+r_1
+\end{equation}
+成立且满足$0\leq r_1<q$，这个式子(\ref{eqn_daiyuchufadingli})中的数$p_1,r_2$是未知的，其中$p_1$称为\textbf{$N$除以$q$的商}，$r_1$称为\textbf{$N$除以$q$的余数}，我们可以用数学符号表示为
+\begin{equation}
+    p_1=\mathop{\rm floor}(N/q),\qquad r_1=N\mod q
+\end{equation}
+根据$r_1$的范围$0\leq r_1<q$我们知道$p_1=(N-r_1)/q$的范围在
+$$
+    N/q-1<p_1\leq N/q
+$$
+之间，由于$q\neq 0$那么只有$q\geq 1$，即$N/q\leq N$，也就是$p_1\leq N$。
+\par 我们总结一下，对两个无符号数$N,q$，且$q\neq 0$我们有
+\begin{equation}
+    \begin{cases}N=p_1q+r_1\\0\leq p_1\leq N\\0\leq r_1<q\end{cases}
+\end{equation}
+如果$p_1\geq q$的话(我们只得到了$p_1\leq N$)那么重复上述步骤我们能找到无符号整数$p_2,r_2$来构造新的带余除法定理
+\begin{equation}
+    p_1=p_2q+r_2
+\end{equation}
+类似的有条件
+$$0\leq p_2\leq p_1,\qquad 0\leq r_2<q$$
+此时我们来推一下$N$的表达式
+\begin{equation}
+        N=p_1q+r_1=(p_2q+r_2)q+r_1=p_2q^2+r_2q+r_1
+\end{equation}
+我们把这个过程不断地重复下去，最终会得到一系列的带余除法定理
+\begin{equation}
+    p_{n-1}=p_nq+r_n, n=1,2,3,\cdots\qquad\text{$n=1$时定义$p_0=N$}
+\end{equation}
+其中数列$\{p_n\},\{r_n\}\ (n=1,2,\cdots)$满足
+\begin{equation}
+    0\leq\cdots\leq p_n\leq\cdots\leq p_2\leq p_1,\qquad 0\leq r_1,r_2,\cdots,r_n,\cdots< q
+\end{equation}
+第一个不等式是一个不等式链，这表示$p_n$向下递减但是有下界0，这说明$p_n$不会无限的递减，最终会停在某一个值$p_{n_0}=p_{n_0+1}=p_{n_0+2}=\cdots$，而第二个不等式告诉我们$r_1,r_2,\cdots,r_n$都有一个范围。类似的，我们可以推一下$N$的表达式
+\begin{align}
+        N&=(p_3q+r_3)q^2+r_2q+r_1=p_3q^3+r_3q^2+r_2q+r_1\notag\\
+        &=(p_4q+r_4)q^3+r_3q^2+r_2q+r_1=p_4q^4+r_4q^3+r_3q^2+r_2q+r_1\notag\\
+        &=\cdots\notag\\
+        &=p_nq^n+r_nq^{n-1}+r_{n-1}q^{n-2}+r_{n-2}q^{n-3}+\cdots+r_2q+r_1=p_nq^n+\sum_{k=1}^n r_kq^{k-1}\label{eqn_express_of_N}
+\end{align}
+我们知道$p_n$必定会递减到某个恒定值$p_{n_0}$，下面我们要论证$p_{n_0}=0$。事实上假设在$n=n_0$时$p_n=p_{n_0}$并恒定在$n_0$，那么我们把上面式子的$n$在$n_0$后再加一步
+$$N=p_{n_0}q^{n_0}+\sum_{k=1}^{n_0}r_kq^{k-1}=p_{n_0}q^{n_0+1}+\sum_{k=1}^{n_0+1}r_kq^{k-1}$$
+消去两边相同的项有
+$$p_{n_0}q^{n_0}=p_{n_0}q^{n_0+1}+r_{n_0+1}q^{n_0}$$
+对这个方程两边消去$q^{n_0}$后得到$p_{n_0}(q-1)+r_{n_0+1}=0$, 那么$r_{n_0+1}=0$并且$q=1$或$p_{n_0}=0$。在$q=1$时代入表达式(\ref{eqn_express_of_N})可以看到全部的$r_{k}=0$，这是一个没有意义的平凡情况，我们不需要讨论，这说明了$p_{n_0}=0$的确成立。
+\par 当$n\geq n_0$时式(\ref{eqn_express_of_N})就变成了完全是$r_1,r_2,\cdots,r_{n_0}$这$n_0$个余数的函数，我们将其记作串$r_{n_0}\cdots r_2r_1$，这就是数$N$的\textbf{$q$进制表示法}。为了说清楚这个串是在$q$进制下表示的，我们将其记作$(r_{n_0}\cdots r_2r_1)_{(q)}$
+\begin{equation}\label{eqn_qexp_of_N}
+    N=(r_{n_0}\cdots r_2r_1)_{(q)}=\sum_{k=1}^n r_kq^{k-1}
+\end{equation}
+仔细观察式(\ref{eqn_qexp_of_N})，不难发现$q=10$时上式就是一般地计数法，不难猜出在任意$q$进制下表示的无符号整数都是满足与正常计数法相同的竖式运算法则，这些内容可以参考相关的数学教材。
+\par 下面我们要给出进制转换的一个重要定理，这个定理可以加速一类进制转换的计算速度，对程序设计尤其重要：
+\begin{theorem*}
+    对正整数$n$，$q^n$进制的一位无符号整数可以用最高$n$位$q$进制无符号整数表示，我们记作
+    \begin{equation}
+        (b)_{(q^n)}=\left(a^{(b)}_{n}a^{(b)}_{n-1}\cdots a^{(b)}_1\right)_{(q)},\qquad b=0,1,2,\cdots,q^{n-1}\label{eqn_theorem_of_exp_of_qntoq_1bit}
+    \end{equation}
+    对任意$q^n$进制数$(b_Nb_{N-1}\cdots b_1)_{(q^n)}$，其$q$进制表示为
+    \begin{align}
+        &(b_Nb_{N-1}\cdots b_1)_{(q^n)}\notag\\=&\left(a^{(b_N)}_{n}a^{(b_N)}_{n-1}\cdots a^{(b_N)}_1a^{(b_{N-1})}_{n}a^{(b_{N-1})}_{n-1}\cdots a^{(b_{N-1})}_1\cdots a^{(b_1)}_{n}a^{(b_1)}_{n-1}\cdots a^{(b_1)}_1\right)_{(q)}\label{eqn_theorem_of_exp_of_qntoq}
+    \end{align}
+    相反，对任意一个$q^n$进制数，如果位数是$n$的整数倍$N$倍，则也可以按照式(\ref{eqn_theorem_of_exp_of_qntoq})反推出其$q$进制表示；如果其位数不是$n$的整数倍，则在最高位前面补0使其位数为$n$的整数倍后再次进行同样的操作即可。
+\end{theorem*}
+\begin{proof}
+    直接把(\ref{eqn_theorem_of_exp_of_qntoq})展开，利用(\ref{eqn_theorem_of_exp_of_qntoq_1bit})即可。具体计算过程：
+    \[\begin{split}
+        (b)_{(q^n)}&=\sum_{k=1}^n \left(a_k^{(b)}\right)_{(q)} q^{k-1}\\
+        (b_Nb_{N-1}\cdots b_1)_{(q^n)}&=\sum_{\ell=1}^N(b_\ell)_{(q^n)}(q^n)^{\ell-1}=\sum_{\ell=1}^N\sum_{k=1}^n \left(a_k^{(b_\ell)}\right)_{(q)} q^{k-1}(q^n)^{\ell-1}\\
+        &=\sum_{k=1}^n\sum_{\ell=1}^N \left(a_k^{(b_\ell)}\right)_{(q)} q^{n(\ell-1)+k-1}
+    \end{split}\]
+    另一边展开为
+    \[\begin{split}
+        &\left(a^{(b_N)}_{n}a^{(b_N)}_{n-1}\cdots a^{(b_N)}_1a^{(b_{N-1})}_{n}a^{(b_{N-1})}_{n-1}\cdots a^{(b_{N-1})}_1\cdots a^{(b_1)}_{n}a^{(b_1)}_{n-1}\cdots a^{(b_1)}_1\right)_{(q)}\\
+        =&\sum_{\ell=1}^N\left(a^{(b_\ell)}_{n}a^{(b_\ell)}_{n-1}\cdots a^{(b_\ell)}_1\right)_{(q)} q^{n(\ell-1)}=\sum_{\ell=1}^N\left[\sum_{k=1}^n\left(a^{(b_\ell)}_{k}\right)_{(q)} q^{k-1}\right] q^{n(\ell-1)}\\
+        =&\sum_{\ell=1}^N\sum_{k=1}^n \left(a_k^{(b_\ell)}\right)_{(q)} q^{n(\ell-1)+k-1}
+    \end{split}\]
+    可以看到(\ref{eqn_theorem_of_exp_of_qntoq})式两边展开后的二重和式交换求和次序就是相同的，这就证明了定理。
+\end{proof}
+\par 在文献\cite{Zorich:MA}第一卷(Part 1)中第二章\S 2的第4小结c段中给出了任意实数的$q$进制表示法，每个实数$R$都可以表示为一个有符号的无限序列
+\begin{equation}\label{eqn_exp_of_real_number_with_q_exp}
+    R=\begin{cases}
+        (\alpha_p\alpha_{p-1}\cdots\alpha_1.\alpha_{0}\alpha_{-2}\cdots)_{(q)}&(p\geq 1)\\
+        (0.\alpha_0\alpha_{-1}\alpha_{-2}\cdots)_{(q)}&(p=0)\\
+        (0.\underbrace{00\cdots 0}_{|p|}\alpha_p\alpha_{p-1}\cdots)_{(q)}&(p<0)
+    \end{cases}
+\end{equation}
+$$\alpha_p\neq 0,\qquad\alpha_k=0,1,2,\cdots,q-1\ (k=p,p-1,\cdots)$$
+式(\ref{eqn_exp_of_real_number_with_q_exp})中的序列定义为
+$$(\alpha_r\alpha_{r-1}\cdots\alpha_1.\alpha_0\alpha_{-1}\alpha_{-2}\cdots)_{(q)}:=\sum_{k=-\infty}^r\left(\alpha_r\right)_{(q)} q^{r-1}$$
+这里$r$在$p\geq 1$时为$p$，在$p<1$时为$1$且$\alpha_r,\alpha_{r-1},\cdots,\alpha_{p+1}=0$。
+\par 这种表示法有一个弊端就是任意实数到计数序列的映射不是一一对应的，例如下列两个序列代表同一个实数：
+$$\left(\alpha_p\alpha_{p-1}\cdots\alpha_{1}.\alpha_{0}\alpha_{-1}\cdots\alpha_{-n+1}\alpha_{-n}000\cdots\right)_{(q)}$$
+$$\left(\alpha_p\alpha_{p-1}\cdots\alpha_{1}.\alpha_{0}\alpha_{-1}\cdots\alpha_{-n+1}(\alpha_{-n}-1)(\alpha_{-n}-1)(\alpha_{-n}-1)\cdots\right)_{(q)}$$
+需要格外注意。
+
+\section*{数字电路}
+\par 一个二进制位可以用数字电路的一个端子表示，我们用低电平表示0，用高电平表示1。除开二进制运算外我们还需要引入\textbf{位运算}。位运算是逐位运算的，即：
+\begin{definition*}
+    对二进制数$(a_na_{n-1}\cdots a_1)_{(2)}$, $(b_nb_{n-1}\cdots b_1)_{(2)}$ (位数不相同时在位数短的那个数前面补0使其相同)。若某种运算$*$是位运算，则要求
+    $$(a_na_{n-1}\cdots a_1)_{(2)}*(a_na_{n-1}\cdots a_1)_{(2)}=(c_nc_{n-1}\cdots c_1)_{(2)}$$
+    $$c_k=a_k*b_k,\qquad k=1,2,\cdots,n$$
+\end{definition*}
+\par 所以定义一个位运算我们只要定义这个运算在两个一位二进制数(称为\textbf{bit位})上的运算结果即可，这个结果有$2^\#$个值( $\#$为运算操作数个数)，将这些值全部列出来得到的就是这个位运算的\textbf{真值表}。
+\par 下面我们来定义一些常用的位运算。
+\subsection*{操作数=1的位运算}
+\par 单操作数的位运算只能有两种，一种就是保持操作数不变的恒等运算，另一种就是我们要定义的\textbf{否运算}。前者是平凡情况，我们不作考虑，否运算
+\subsection*{操作数=2的位运算}
