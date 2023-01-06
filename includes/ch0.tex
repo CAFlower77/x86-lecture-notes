@@ -107,5 +107,132 @@ $$\left(\alpha_p\alpha_{p-1}\cdots\alpha_{1}.\alpha_{0}\alpha_{-1}\cdots\alpha_{
 \par 所以定义一个位运算我们只要定义这个运算在两个一位二进制数(称为\textbf{bit位})上的运算结果即可，这个结果有$2^\#$个值( $\#$为运算操作数个数)，将这些值全部列出来得到的就是这个位运算的\textbf{真值表}。
 \par 下面我们来定义一些常用的位运算。
 \subsection*{操作数=1的位运算}
-\par 单操作数的位运算只能有两种，一种就是保持操作数不变的恒等运算，另一种就是我们要定义的\textbf{否运算}。前者是平凡情况，我们不作考虑，否运算
+\par 单操作数的位运算只能有两种(排除两种常数运算)，一种就是保持操作数不变的恒等运算，另一种就是我们要定义的\textbf{否运算}。前者是平凡情况，这种运算往往出现在电路中，被称为\textbf{缓冲}，其目的是降低电路的电子干扰(否则没必要设计电路，直接用导线连到端口即可)。那么容易得到否运算的真值表如下：
+\begin{equation}\label{eqn_of_not_a_tftable}
+    \begin{array}{c|c}
+        a&\bnot a\\
+        \hline
+        0&1\\
+        1&0\\
+    \end{array}
+\end{equation}
+事实上对命题$P$，我们常常用0表示$P=\rm false$，用1表示$P=\rm true$，那么$P$的真值就能被一个1位二进制数表示。根据式(\ref{eqn_of_not_a_tftable})容易看到，若$P$的真值可以表示为1位二进制数$a$，则$\bnot a$就是$P$的\textbf{否命题}$\lnot P$的真值。
 \subsection*{操作数=2的位运算}
+\par 根据(\ref{eqn_of_not_a_tftable})式的启发，我们只定义能够对应命题逻辑运算的位运算，因为全部的二元位运算太多了(有$2^{(2^\#)}|_{\#=2}-2=14$种这么多)。为方便我们用一对大小写(如$A$和$a$)的大写表示命题，小写表示对应这个命题真值的二进制数，那么位操作的真值表就与命题运算的真值表一致了。
+\par 对基础的\textbf{与运算$\band$} (逻辑学中称为\textbf{合取$\land$} )和\textbf{或运算$\bor$} (逻辑学中称为\textbf{析取$\lor$} )我们有：
+\begin{equation}\label{eqn_of_and_or_a_tftable}
+    \begin{array}{cc|cc|c|c|c|c}
+        a&A&b&B&a\band b&A\land B&a\bor b&A\lor B\\
+        \hline
+        0&\rm false&0&\rm false&0&\rm false&0&\rm false\\
+        0&\rm false&1&\rm true&0&\rm false&1&\rm true\\
+        1&\rm true&0&\rm false&0&\rm false&1&\rm true\\
+        1&\rm true&1&\rm true&1&\rm true&1&\rm true
+    \end{array}
+\end{equation}
+式(\ref{eqn_of_and_or_a_tftable})从原则上以及足够我们使用了，而蕴含、反蕴涵、等值等逻辑二元命题运算适用价值并不大，所以我们没有定义相关的位运算。另外根据逻辑学我们还知道两个运算：\textbf{异或$\oplus$}和\textbf{同或$\odot$}
+$$A\oplus B=(\lnot A\land B)\lor(A\land\lnot B)$$
+$$A\odot B=(A\land B)\lor(\lnot A\land\lnot B)$$
+这两个运算有定义为位运算$\bxor$ (异或)、$\bxnor$ (同或)的价值
+\begin{equation}\label{eqn_of_xor_xnor__a_tftable}
+    \begin{array}{cc|cc|c|c|c|c}
+        a&A&b&B&a\bxor b&A\oplus B&a\bxnor b&A\odot B\\
+        \hline
+        0&\rm false&0&\rm false&0&\rm false&1&\rm true\\
+        0&\rm false&1&\rm true&1&\rm true&0&\rm false\\
+        1&\rm true&0&\rm false&1&\rm true&0&\rm false\\
+        1&\rm true&1&\rm true&0&\rm false&1&\rm true
+    \end{array}
+\end{equation}
+另外对(\ref{eqn_of_and_or_a_tftable})式取否也有作为新的运算的价值，这两个位运算没有对应的逻辑运算(原则上也可以定义)，其真值表为
+\begin{equation}\label{eqn_of_nor_nand__a_tftable}
+    \begin{array}{c|c|c|c}
+        a&b&a\bnand b&a\bnor b\\
+        \hline
+        0&0&1&1\\
+        0&1&1&0\\
+        1&0&1&0\\
+        1&1&0&0
+    \end{array}
+\end{equation}
+我们称$\bnand$为\textbf{与非}、称$\bnor$为\textbf{或非}。
+\subsection*{逻辑门}
+\par 我们前面提到过一个二进制位可以用数字电路的一个端子表示，那么通过一定的电路手段我们能够得到这么一个1/2端口输入1端口输出的电路网络，其输出为输入的位运算，这种电路网络经过封装后被我们称为\textbf{逻辑门}。逻辑门电路的构造比直接构造运算电路要容易得多，所以事实上二进制的运算电路都是利用逻辑门构造的。下面给出不同位运算的逻辑门电路符号：
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}
+        \node at (0,0) [left] {缓冲};
+        \draw (4,0) node[ieeestd buffer port] (gate) {};
+        \draw (gate.in) -- ++(-1,0) node[left] {In};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}
+        \node at (0,0) [left] {否门};
+        \draw (4,0) node[ieeestd not port] (gate) {};
+        \draw (gate.in) -- ++(-1,0) node[left] {In};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}
+        \node at (0,0) [left] {与门};
+        \draw (4,0) node[ieeestd and port] (gate) {};
+        \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
+        \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}
+        \node at (0,0) [left] {或门};
+        \draw (4,0) node[ieeestd or port] (gate) {};
+        \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
+        \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}
+        \node at (0,0) [left] {异或门};
+        \draw (4,0) node[ieeestd xor port] (gate) {};
+        \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
+        \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}
+        \node at (0,0) [left] {同或门};
+        \draw (4,0) node[ieeestd xnor port] (gate) {};
+        \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
+        \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}
+        \node at (0,0) [left] {与非门};
+        \draw (4,0) node[ieeestd nand port] (gate) {};
+        \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
+        \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{circuitikz}
+        \node at (0,0) [left] {或非门};
+        \draw (4,0) node[ieeestd nor port] (gate) {};
+        \draw (gate.in 1) -- ++(-1,0) node[left] {In 1};
+        \draw (gate.in 2) -- ++(-1,0) node[left] {In 2};
+        \draw (gate.out) -- ++(1,0) node[right] {Out};
+    \end{circuitikz}
+\end{figure}
