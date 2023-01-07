@@ -380,7 +380,56 @@ $$A\ \mathtt{\langle FA\rangle}\ B=(A+B)\mod 2^n$$
 如图作一条线，表盘上这条线一侧的刻度最高位为0，领一侧的刻度最高位为1。我们从N极的0000开始将其定义为0，指针顺时针走一个刻度数字$+1$、逆时针走一个刻度数字$-1$，那么容易看到图中分割表盘的线把表盘上的刻度分成了非负数(正半侧)和负数(负半侧)两组。由于0在表盘正半侧，那么负半侧能表示的最大(指绝对值)负数的绝对值闭正半侧能表示的最大非负数大1。利用上述表盘构造的从二进制序列到整数的表示称为\textbf{补码}。利用二进制计数法容易算出\textsuperscript{\cite{CSAPP}}，$n$进制补码的范围为$-2^{n-1}\sim 2^{n-1}-1$，在这里我们引入几个常用的记号
 $$\UMax_n:=2^n-1,\quad \TMax_n=2^{n-1}-1,\quad \TMin_n=-2^{n-1}$$
 $$\text{(不引起混淆时可以省略下标)}$$
-
-\addcontentsline{toc}{section}{时序电路}
-\section*{时序电路}
-\par 如果我们把逻辑门的一个输出返回到输入构成反馈，那么得到的电路将有一些特殊的属性。
+\addcontentsline{toc}{section}{存储电路}
+\section*{存储电路}
+\par 如果我们把逻辑门的一个输出返回到输入构成反馈，那么得到的电路将有一些特殊的属性。我们考虑下面这个电路：
+\[\begin{circuitikz}
+    \draw (0,0) node[or port] (orA) {};
+    \draw (orA.in 1) node[above] {$P$};
+    \draw ($(orA.in 1) + (-4,1)$) node[ocirc] (input) {} |- ++(2,-1) to[switch,l=K] (orA.in 1);
+    \node at (input) [above] {$+5\si{V}$ Input};
+    \draw (orA.in 2) node[below] {$Q$} -| ++(-1,-1.5) -| (orA.out) node[circ] {};
+    \draw (orA.out) -- ++(1,0) node[right] {Output};
+\end{circuitikz}\]
+在断电情况下所有支路都是低电平0, Input持续为高电平$+5\si{V}$，开关K默认断开。现在我们把K闭合，那么Input会给$P$一个$+5\si{V}$的高电平输入从而激活或门，此时输出为$\rm Output=1$。注意，或门的输出不仅输出到Output，还通过另一条支路输出到或门的另一个输入$Q$，那么此时$Q=1$也被激活。如果现在断开开关K，$Q=1$依然还在继续激活或门，此时Output将持续保持高电平输出。我们称这种现象为\textbf{存储现象}，开关K闭合的过程称之为对信号Input的\textbf{写入}。
+\par 现在我们来研究如何清除数据。清除数据实际上就相当于写入0，那么我们可以用一个非门，非门的输出与或门的输出同时输入到一个与门上，再把与门的输出分一条支路介入或门的另一个输出，电路图如下：
+\[\begin{circuitikz}
+    \draw (0,0) node[or port] (orA) {};
+    \draw ($2*(orA.out)-(orA.in 1)+(1,0)$) node[and port] (andA) {};
+    \draw ($(orA.in 2) + (-4,3)$) node[ocirc] (input) {} |- ++(2,-3) to[switch,l=SET] ++(1,0) -- (orA.in 2);
+    \node at (input) [above] {$+5\si{V}$ Input};
+    \draw ($(orA.in 2) + (-4,0)$) to[short,*-] ++(0,-1) |- ++(2,0) to[switch,l=RESET] ++(1,0);
+    \draw ($(orA.in 2) + (3,-1)$) node[not port] (notA) {};
+    \draw (notA.out) -| (andA.in 2);
+    \draw ($(orA.in 2) + (-1,-1)$) -- (notA.in);
+    \draw (orA.out) -- (andA.in 1);
+    \draw (andA.out) -- ++(1.5,0) node[right] {Output};
+    \draw ($(andA.out)+(0.5,0)$) node[circ] {} -- ++(0,2) -- ++(-7.5,0) |- (orA.in 1); 
+\end{circuitikz}\]
+从电路图中可以看到，一旦RESET闭合，则非门会直接输出0到与门的一个输入从而直接禁用掉Output输出，这就实现了RESET的复位功能。
+\par 像这种能够写入和清除数据的电路称为\textbf{存储电路}，为了降低布线难度我们可以把上述电路作如下改进：
+\[\begin{circuitikz}
+    \draw (0,0) node[and port] (andA) {};
+    \draw ($2*(andA.out)-(andA.in 2)+(0.5,0)$) node[or port] (orA) {};
+    \draw ($(andA.out)+(0,-3)$) node[and port] (andB) {};
+    \draw ($(andB.in 1)-(1,-0.5)$) node[not port] (notA) {};
+    \draw ($(andB.out)+(1,0)$) node[not port] (notB) {};
+    \draw ($(orA.out)+(1.5,-2)$) node[and port] (andC) {};
+    \draw ($(andA.in 1)+(-4,1.5)$) node[ocirc] (input) {} to[short,-*] ++(0,-1) node (X1) {} to[switch, l=WRITE] ++(2,0) to[short,-*] ++(1,0) node (X2) {} -- (andA.in 1); 
+    \node at (input) [above] {$+5\si{V}$ Input};
+    \draw ($(andA.in 1)+(-4,0.5)$) -- ($(X1)!(andB.in 2)!(input)$) to[switch, l=ENABLE] ++(2,0) node[circ] (X3) {} -- (andB.in 2);
+    \draw ($(andA.in 1)+(-1,0.5)$) |- (notA.in);
+    \node at ($(X2)-(0,1)$) (X2d) {};
+    \node at ($(X2)!(andA.in 2)!(X2d)$) [jump crossing,scale=1.5] (X4) {};
+    \draw (X3) |- (X4.west);
+    \draw (X4.east) -- (andA.in 2);
+    \draw (notA.out) -- (andB.in 1);
+    \draw (andB.out) -- (notB.in);
+    \draw (andA.out) -- (orA.in 2);
+    \draw (orA.out) -| (andC.in 1);
+    \draw (notB.out) -| (andC.in 2);
+    \draw (andC.out) -- ++(1,0) node[below left] {Output};
+    \draw (orA.in 1) -| ++(-0.5,1) -| (andC.out);
+    \node at (andC.out) [circ] {}; 
+\end{circuitikz}\]
+其中开关ENABLE控制WRITE是否生效。可以看到，这个电路的ENABLE线是可以给多个位存储单元共用的，这就极大地降低了布线难度。像这种电路称为\textbf{静态随机读取存储器电路(SRAM)}。
