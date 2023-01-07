@@ -83,7 +83,7 @@
 
 \usepackage{circuitikz}
 
-\usetikzlibrary{calc}
+\usetikzlibrary{calc,arrows,decorations.markings}
 
 \ctikzset{american, logic ports=ieee,chips/scale=1.5}
 
@@ -110,6 +110,15 @@
 \DeclareMathOperator{\bxnor}{\texttt{xnor}}
 \DeclareMathOperator{\bnor}{\texttt{nor}}
 \DeclareMathOperator{\bnand}{\texttt{nand}}
+\DeclareMathOperator{\UMax}{\texttt{UMax}}
+\DeclareMathOperator{\TMax}{\texttt{TMax}}
+\DeclareMathOperator{\TMin}{\texttt{TMin}}
+\DeclareMathOperator{\BU}{\texttt{B2U}}
+\DeclareMathOperator{\BT}{\texttt{B2T}}
+\DeclareMathOperator{\UB}{\texttt{U2B}}
+\DeclareMathOperator{\TB}{\texttt{T2B}}
+\DeclareMathOperator{\UT}{\texttt{U2T}}
+\DeclareMathOperator{\TU}{\texttt{T2U}}
 \renewcommand{\leq}{\leqslant}
 \renewcommand{\geq}{\geqslant}
 \newcommand{\set}{\leftarrow}
@@ -279,6 +288,11 @@ $\cdots$\\ % License information, replace this with your own license (if any)
 \chapterimage{Images/bgp2.jpg}
 \include{includes/ch0.tex}
 \numberwithin{equation}{chapter}
+\chapterimage{Images/bgp3.jpg}
+\include{includes/ch1.tex}
+\part{计算机组成}
+\part{实模式}
+\part{32位保护模式}
 
 
 \part*{\appendixname}

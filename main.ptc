@@ -1,12 +1,23 @@
 \contentsline {chapter}{绪论}{5}{chapter*.1}%
 \contentsline {section}{计数法与进制}{5}{chapter*.2}%
 \contentsline {section}{数字电路}{8}{equation.0.0.12}%
+\contentsline {section}{时序电路}{13}{equation.0.0.18}%
+\contentsline {chapter}{\numberline {1}ch1.tex}{15}{chapter.1}%
 \ttl@starttoc {part@1}
-\contentsline {part}{Appendix}{13}{part*.3}%
-\contentsline {chapter}{\numberline {A}逻辑门电路符号}{15}{appendix.A}%
-\contentsline {section}{\numberline {A.1}IEEE标准}{15}{section.A.1}%
-\contentsline {section}{\numberline {A.2}American标准}{16}{section.A.2}%
-\contentsline {section}{\numberline {A.3}European标准}{16}{section.A.3}%
-\contentsline {chapter}{\numberline {B}ap2.tex}{17}{appendix.B}%
-\contentsline {chapter}{参考文献}{18}{appendix.B}%
+\contentsline {part}{\numberline {I}计算机组成}{17}{part.1}%
+\ttl@stoptoc {part@1}
+\ttl@starttoc {part@2}
+\contentsline {part}{\numberline {II}实模式}{19}{part.2}%
+\ttl@stoptoc {part@2}
+\ttl@starttoc {part@3}
+\contentsline {part}{\numberline {III}32位保护模式}{21}{part.3}%
+\ttl@stoptoc {part@3}
+\ttl@starttoc {part@4}
+\contentsline {part}{Appendix}{23}{part*.3}%
+\contentsline {chapter}{\numberline {A}逻辑门电路符号}{25}{appendix.A}%
+\contentsline {section}{\numberline {A.1}IEEE标准}{25}{section.A.1}%
+\contentsline {section}{\numberline {A.2}American标准}{26}{section.A.2}%
+\contentsline {section}{\numberline {A.3}European标准}{26}{section.A.3}%
+\contentsline {chapter}{\numberline {B}ap2.tex}{27}{appendix.B}%
+\contentsline {chapter}{参考文献}{28}{appendix.B}%
 \contentsfinish 
